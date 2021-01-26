@@ -3,4 +3,4 @@
 
 Spring application с использованием Hibernate.
 
-![image alt](www.github.com/laFanDer93/marvelapi/src/main/resources/swagger.jpg)
+![image alt](https://github.com/laFanDer93/marvelapi/blob/master/src/main/resources/swagger.jpg)
