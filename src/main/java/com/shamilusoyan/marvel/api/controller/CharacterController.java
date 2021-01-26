@@ -43,7 +43,6 @@ public class CharacterController {
     }
 
     @PostMapping("/")
-    @PutMapping("/")
     public ResponseEntity addNewCharacter(@RequestBody Character character) {
         if(Character.hasNullField(character)){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("400 - неправильно составлен запрос к серверу");
