@@ -1,33 +1,29 @@
-package com.shamilusoyan.marvel.rest_api.controller;
+package com.shamilusoyan.marvel.api.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shamilusoyan.marvel.rest_api.entity.Character;
-import com.shamilusoyan.marvel.rest_api.entity.Comic;
-import com.shamilusoyan.marvel.rest_api.service.CharacterService;
+import com.shamilusoyan.marvel.api.entity.Character;
+import com.shamilusoyan.marvel.api.entity.Comic;
+import com.shamilusoyan.marvel.api.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-@RequestMapping("/v1/public/")
+@RequestMapping("/v1/public/characters")
 @RestController
 public class CharacterController {
 
     @Autowired
     private CharacterService characterService;
 
-
-    @GetMapping("/characters")
+    @GetMapping("/")
     public List<Character> showAllCharacters() {
         List<Character> allCharacter = characterService.getAllCharacter();
         return allCharacter;
     }
 
-    @GetMapping("/characters/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity getCharacter(@PathVariable int id) {
         Character character = characterService.getCharacter(id);
         if(character==null){
@@ -36,7 +32,7 @@ public class CharacterController {
         return new ResponseEntity(character,HttpStatus.OK);
     }
 
-    @GetMapping("/characters/{id}/comics")
+    @GetMapping("/{id}/comics")
     public ResponseEntity getComicsOfCharacter(@PathVariable int id) {
         Character character = characterService.getCharacter(id);
         if(character==null){
@@ -46,20 +42,12 @@ public class CharacterController {
         return new ResponseEntity(comics,HttpStatus.OK);
     }
 
-    @PostMapping("/characters")
+    @PostMapping("/")
+    @PutMapping("/")
     public ResponseEntity addNewCharacter(@RequestBody Character character) {
         if(Character.hasNullField(character)){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("400 - неправильно составлен запрос к серверу с помощью метода POST.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("400 - неправильно составлен запрос к серверу");
         }
-        characterService.saveCharacter(character);
-        return new ResponseEntity(character,HttpStatus.OK);
-    }
-    @PutMapping("/characters")
-    public ResponseEntity updateCharacter(@RequestBody Character character) {
-        if(Character.hasNullField(character)){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("400 - неправильно составлен запрос к серверу с помощью метода PUT.");
-        }
-
         characterService.saveCharacter(character);
         return new ResponseEntity(character,HttpStatus.OK);
     }

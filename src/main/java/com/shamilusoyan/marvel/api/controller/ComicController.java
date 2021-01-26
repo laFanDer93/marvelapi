@@ -1,9 +1,8 @@
-package com.shamilusoyan.marvel.rest_api.controller;
+package com.shamilusoyan.marvel.api.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shamilusoyan.marvel.rest_api.entity.Character;
-import com.shamilusoyan.marvel.rest_api.entity.Comic;
-import com.shamilusoyan.marvel.rest_api.service.ComicService;
+import com.shamilusoyan.marvel.api.entity.Character;
+import com.shamilusoyan.marvel.api.entity.Comic;
+import com.shamilusoyan.marvel.api.service.ComicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,20 +10,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/v1/public/")
+@RequestMapping("/v1/public/comics")
 @RestController
 public class ComicController {
 
     @Autowired
     private ComicService comicService;
 
-    @GetMapping("/comics")
+    @GetMapping("/")
     public List<Comic> showAllComics() {
         List<Comic> allComic = comicService.getAllComic();
         return allComic;
     }
 
-    @GetMapping("/comics/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity getComic(@PathVariable int id) {
         Comic comic = comicService.getComic(id);
         if (comic == null) {
@@ -33,7 +32,7 @@ public class ComicController {
         return new ResponseEntity(comic, HttpStatus.OK);
     }
 
-    @GetMapping("/comics/{id}/characters")
+    @GetMapping("/{id}/characters")
     public ResponseEntity getCharactersOfComics(@PathVariable int id) {
         Comic comic = comicService.getComic(id);
         if (comic == null) {
@@ -43,7 +42,7 @@ public class ComicController {
         return new ResponseEntity(characters, HttpStatus.OK);
     }
 
-    @PostMapping("/comics")
+    @PostMapping("/")
     public ResponseEntity addNewComic(@RequestBody Comic comic) {
         if (Comic.hasNullField(comic)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("400 - Неправильно составлен запрос к серверу с помощи метода POST.");
@@ -53,7 +52,7 @@ public class ComicController {
     }
 
 
-    @PutMapping("/comics")
+    @PutMapping("/")
     public ResponseEntity updateComic(@RequestBody Comic comic) {
         if (Comic.hasNullField(comic)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("400 - Неправильно составлен запрос к серверу с помощи метода PUT.");

@@ -1,4 +1,4 @@
-package com.shamilusoyan.marvel.rest_api;
+package com.shamilusoyan.marvel.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

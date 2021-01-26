@@ -1,7 +1,7 @@
-package com.shamilusoyan.marvel.rest_api.service;
+package com.shamilusoyan.marvel.api.service;
 
-import com.shamilusoyan.marvel.rest_api.dao.ComicRepository;
-import com.shamilusoyan.marvel.rest_api.entity.Comic;
+import com.shamilusoyan.marvel.api.dao.ComicRepository;
+import com.shamilusoyan.marvel.api.entity.Comic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

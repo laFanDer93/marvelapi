@@ -1,4 +1,4 @@
-package com.shamilusoyan.marvel.rest_api.swagger;
+package com.shamilusoyan.marvel.api.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
